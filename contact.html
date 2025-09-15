@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RecipeSite — Contact</title>
+  <meta name="description" content="Contact the RecipeSite team">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo"><a href="index.html">RecipeSite</a></h1>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="recipes.html">Recipes</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+        <button id="dark-mode-toggle" aria-label="Switch to dark mode">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container narrow">
+    <section>
+      <h2>Get In Touch</h2>
+      <p>Have suggestions, feedback, or questions about RecipeSite? We'd love to hear from you! Send us a message and we'll get back to you as soon as possible.</p>
+
+      <form id="contact-form" novalidate>
+        <label>
+          <span>Name *</span>
+          <input name="name" type="text" required aria-describedby="name-error">
+        </label>
+
+        <label>
+          <span>Email Address *</span>
+          <input name="email" type="email" required aria-describedby="email-error">
+        </label>
+
+        <label>
+          <span>Message *</span>
+          <textarea name="message" rows="6" required placeholder="Tell us what's on your mind..." aria-describedby="message-error"></textarea>
+        </label>
+
+        <button type="submit">Send Message</button>
+        <div id="contact-status" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> RecipeSite • Powered by Spoonacular API</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="js/config.js"></script>
+  <script src="js/script.js" defer></script>
+</body>
+</html>

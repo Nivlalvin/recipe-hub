@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RecipeSite — Home</title>
+  <meta name="description" content="Discover delicious recipes with advanced search and filtering">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo"><a href="index.html">RecipeSite</a></h1>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="recipes.html">Recipes</a>
+        <a href="contact.html">Contact</a>
+        <button id="dark-mode-toggle" aria-label="Switch to dark mode">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h2>Discover Amazing Recipes</h2>
+      <p>Search thousands of recipes with advanced filters for cuisine, diet, and dietary restrictions. Find your perfect dish today!</p>
+      <a class="cta" href="recipes.html">Explore Recipes</a>
+    </section>
+
+    <section class="featured">
+      <h3>Featured Recipes</h3>
+      <div id="featured-list" class="recipe-grid"></div>
+    </section>
+  </main>
+
+  <!-- Modal for recipe details -->
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-panel">
+      <button class="modal-close" aria-label="Close recipe details">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> RecipeSite • Powered by Spoonacular API</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="js/config.js"></script>
+  <script src="js/script.js" defer></script>
+</body>
+</html>
