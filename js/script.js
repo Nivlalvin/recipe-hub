@@ -16,15 +16,16 @@ let favorites = JSON.parse(localStorage.getItem('recipe-favorites') || '[]');
 
 /* Enhanced fetch helper */
 async function fetchFromSpoonacular(endpoint) {
-  const url = `https://api.spoonacular.com/${endpoint}&apiKey=${SPOONACULAR_KEY}`;
-  const res = await fetch(url);
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ message: 'Network error' }));
-    throw new Error(err.message || 'API request failed');
+  try {
+    const url = `/api/search?${endpoint}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("Failed to fetch from API");
+    return await res.json();
+  } catch (err) {
+    console.error("Error fetching from API:", err);
+    return { results: [] };
   }
-  return res.json();
 }
-
 /* Enhanced search with filters and caching */
 async function searchRecipes(query = "", number = 12, filters = {}) {
   const recipesEl = qs('#recipes');
@@ -46,7 +47,7 @@ async function searchRecipes(query = "", number = 12, filters = {}) {
   }
 
   try {
-    let endpoint = `recipes/complexSearch?query=${encodeURIComponent(query)}&number=${encodeURIComponent(number)}`;
+    let endpoint = `q=${encodeURIComponent(query)}&number=${encodeURIComponent(number)}`;
     
     // Add filters
     if (filters.cuisine) endpoint += `&cuisine=${encodeURIComponent(filters.cuisine)}`;
@@ -61,11 +62,12 @@ async function searchRecipes(query = "", number = 12, filters = {}) {
     searchCache.set(cacheKey, results);
     
     renderRecipeCards(results);
+
     if (results.length === 0 && noResultsEl) {
       noResultsEl.hidden = false;
-      qs('#no-results p').textContent = query ? 
-        `No recipes found for "${query}". Try "pasta" or "chicken"!` : 
-        'No recipes found. Try searching for something delicious!';
+      qs('#no-results p').textContent = query 
+        ? `No recipes found for "${query}". Try "pasta" or "chicken"!` 
+        : 'No recipes found. Try searching for something delicious!';
     }
   } catch (e) {
     console.error('Search error:', e);
@@ -84,6 +86,7 @@ async function searchRecipes(query = "", number = 12, filters = {}) {
     if (loadingEl) loadingEl.hidden = true;
   }
 }
+
 
 let lastSearchParams = {};
 function retryLastSearch() {
