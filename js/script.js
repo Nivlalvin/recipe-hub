@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (qs('#featured-list')) {
     (async () => {
       try {
-        const data = await fetchFromSpoonacular('recipes/complexSearch?number=6');
+        const data = await fetchFromSpoonacular('q=&number=6');
         renderRecipeCards(data.results || []);
       } catch (e) {
         console.warn("Featured list failed:", e);
